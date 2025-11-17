@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Latihan Perulangan & Tabel Perkalian</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h2 { color: #333; margin-top: 24px; }
+
+    .header { background-color: #7bd37b; font-weight: bold; }   
+    .even   { background-color: #9bd0ff; }                     
+    .odd    { background-color: #ffe46b; }                      
+
+    table { border-collapse: collapse; margin-top: 12px; }
+    th, td { border: 1px solid #999; padding: 8px 10px; text-align: center; width: 48px; }
+    th:first-child, td:first-child { width: 70px; }
+
+    .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .chip  { padding: 6px 10px; border-radius: 8px; border: 1px solid #7aa6cc; }
+  </style>
+</head>
+<body>
+
+  <h2>Bilangan genap dari 1 sampai 10</h2>
+  <div id="genap" class="chips"></div>
+
+  <h2>Tabel perkalian matriks 1–10</h2>
+  <table id="perkalian"></table>
+
+  <script>
+    (function renderGenap() {
+      const container = document.getElementById('genap');
+      for (let i = 1; i <= 10; i++) {
+        if (i % 2 === 0) {
+          const span = document.createElement('span');
+          span.className = 'chip even';
+          span.textContent = i;
+          container.appendChild(span);
+        }
+      }
+    })();
+
+    (function renderTable() {
+      const table = document.getElementById('perkalian');
+
+      const thead = document.createElement('thead');
+      const headerRow = document.createElement('tr');
+
+      const thLabel = document.createElement('th');
+      thLabel.textContent = 'bilangan';
+      thLabel.className = 'header';
+      headerRow.appendChild(thLabel);
+
+      for (let j = 1; j <= 10; j++) {
+        const th = document.createElement('th');
+        th.textContent = j;
+        th.className = 'header';
+        headerRow.appendChild(th);
+      }
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+
+      const tbody = document.createElement('tbody');
+      for (let i = 1; i <= 10; i++) {
+        const tr = document.createElement('tr');
+
+        const rowHeader = document.createElement('td');
+        rowHeader.textContent = i;
+        rowHeader.className = 'header';
+        tr.appendChild(rowHeader);
+        
+        for (let j = 1; j <= 10; j++) {
+          const hasil = i * j;
+          const td = document.createElement('td');
+          td.textContent = hasil;
+          td.className = hasil % 2 === 0 ? 'even' : 'odd';
+          tr.appendChild(td);
+        }
+
+        tbody.appendChild(tr);
+      }
+      table.appendChild(tbody);
+    })();
+  </script>
+</body>
+</html>
